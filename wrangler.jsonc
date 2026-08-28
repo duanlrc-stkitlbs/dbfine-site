@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dbfine-portal",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": ".next",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dbfine_prod_d1",
+      "database_id": "dbfine-d1-uuid-placeholder"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "CERTIFICATE_BUCKET",
+      "bucket_name": "dbfine-compliance-assets"
+    }
+  ],
+  "env": {
+    "production": {
+      "vars": {
+        "ENVIRONMENT": "production",
+        "SITE_URL": "https://dbfine.co.za"
+      }
+    }
+  }
+}

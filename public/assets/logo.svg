@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <!-- Monogram Hexagon & Flask -->
+  <rect x="10" y="8" width="44" height="44" rx="10" fill="#0B192C"/>
+  <path d="M28 20V25L23 35C22.5 36 23.2 37 24.3 37H39.7C40.8 37 41.5 36 41 35L36 25V20" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="26" y1="20" x2="38" y2="20" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="30" cy="32" r="1.5" fill="#0D9488"/>
+  <circle cx="34" cy="30" r="1" fill="#0D9488"/>
+
+  <!-- Brand Typography -->
+  <text x="65" y="32" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="900" fill="#0B192C" letter-spacing="-0.5">DB FINE</text>
+  <rect x="156" y="18" width="74" height="18" rx="4" fill="#F0FDFA" stroke="#0D9488" stroke-width="1"/>
+  <text x="162" y="31" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="800" fill="#0D9488" letter-spacing="1">CHEMICALS</text>
+  <text x="66" y="45" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.5">SOUTH AFRICA DISTRIBUTION HUB</text>
+</svg>
