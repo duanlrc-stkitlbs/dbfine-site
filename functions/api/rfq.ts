@@ -2,7 +2,16 @@ interface Env {
   DB?: any;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
+interface EventContext<TEnv = Env> {
+  request: Request;
+  env: TEnv;
+  params?: Record<string, string | string[]>;
+  waitUntil?: (promise: Promise<any>) => void;
+  next?: () => Promise<Response>;
+  data?: Record<string, unknown>;
+}
+
+export const onRequestPost = async (context: EventContext<Env>): Promise<Response> => {
   try {
     const body: any = await context.request.json();
 
