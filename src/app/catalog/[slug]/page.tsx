@@ -45,8 +45,58 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    sku: product.id,
+    mpn: product.casNumber,
+    brand: {
+      '@type': 'Brand',
+      name: 'DB Fine Chemicals',
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'ZAR',
+      availability: product.inStockGauteng ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+      seller: {
+        '@type': 'Organization',
+        name: 'DB Fine Chemicals (Pty) Ltd',
+      },
+      itemCondition: 'https://schema.org/NewCondition',
+    },
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: 'CAS Number',
+        value: product.casNumber,
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Grade',
+        value: product.grade,
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Purity Assay',
+        value: product.purity,
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Molecular Formula',
+        value: product.molecularFormula || 'N/A',
+      },
+    ],
+  };
+
   return (
     <div className="py-10 lg:py-14 bg-slate-50/60 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <div className="mb-6">

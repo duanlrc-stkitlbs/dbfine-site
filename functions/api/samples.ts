@@ -11,9 +11,36 @@ interface EventContext<TEnv = Env> {
   data?: Record<string, unknown>;
 }
 
+const corsHeaders = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
+export const onRequestOptions = async (): Promise<Response> => {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+};
+
 export const onRequestPost = async (context: EventContext<Env>): Promise<Response> => {
   try {
     const body: any = await context.request.json();
+
+    if (!body || !body.companyName || !body.contactName || !body.email || !body.targetChemical) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Missing required company, contact, or chemical specification fields',
+        }),
+        {
+          status: 400,
+          headers: corsHeaders,
+        }
+      );
+    }
 
     const year = new Date().getFullYear();
     const randomSeq = Math.floor(1000 + Math.random() * 9000);
@@ -35,14 +62,14 @@ export const onRequestPost = async (context: EventContext<Env>): Promise<Respons
           body.companyName,
           body.contactName,
           body.email,
-          body.phone,
+          body.phone || '',
           body.province || 'Gauteng',
           body.city || 'Johannesburg',
           body.deliveryAddress || '',
           body.targetChemical || '',
           body.casNumber || null,
           body.grade || 'USP/BP/EP',
-          body.trialApplication || '',
+          body.trialApplication || 'Formulation Trial',
           body.estimatedCommercialVolume || null,
           trackingNumber,
           'RECEIVED',
@@ -61,7 +88,7 @@ export const onRequestPost = async (context: EventContext<Env>): Promise<Respons
         sampleId: id,
       }),
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers: corsHeaders,
       }
     );
   } catch (error: any) {
@@ -72,7 +99,7 @@ export const onRequestPost = async (context: EventContext<Env>): Promise<Respons
       }),
       {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: corsHeaders,
       }
     );
   }

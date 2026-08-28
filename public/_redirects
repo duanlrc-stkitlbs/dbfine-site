@@ -1,0 +1,7 @@
+# Canonical HTTPS and Clean Redirects
+/home    /    301
+/contact /rfq 301
+/quote   /rfq 301
+/sample  /samples 301
+/coa     /compliance 301
+/sds     /compliance 301
